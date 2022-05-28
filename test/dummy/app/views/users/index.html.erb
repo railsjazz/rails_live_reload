@@ -1,8 +1,8 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Users</h1>
+<h1>Users List Here</h1>
 
-<div id="users">
+<div id="users" class="container">
   <% @users.each do |user| %>
     <%= render user %>
     <p>
@@ -11,4 +11,4 @@
   <% end %>
 </div>
 
-<%= link_to "New user", new_user_path %>
+<%= link_to "Create New user", new_user_path %>

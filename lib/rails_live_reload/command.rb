@@ -9,9 +9,16 @@ module RailsLiveReload
 
     def command
       result = []
+
+      # from view
       files_to_check = RailsLiveReload.files.slice(*files)
       files_to_check.each do |file, fdt|
         result << file if fdt && fdt > dt
+      end
+
+      # from css
+      RailsLiveReload.files.each do |file, fdt|
+        result << file if fdt && fdt > dt && (file.ends_with?(".css") || file.ends_with?(".js"))
       end
       
       if result.size == 0

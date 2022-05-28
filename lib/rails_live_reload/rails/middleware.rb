@@ -23,7 +23,9 @@ module RailsLiveReload
         else
           @status, @headers, @response = @app.call(env)
 
-          if @status == 500 || (@status.to_s =~ /20./ && env["REQUEST_METHOD"] == "GET")
+          # binding.pry
+
+          if @response.respond_to?(:[]) && (@status == 500 || (@status.to_s =~ /20./ && request.get?))
             new_response = make_new_response(@response[0])
             @headers['Content-Length'] = new_response.bytesize.to_s
             @response = [new_response]
