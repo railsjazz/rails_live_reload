@@ -23,15 +23,11 @@ module RailsLiveReload
         else
           @status, @headers, @response = @app.call(env)
 
-          # binding.pry
-
-          if @response.respond_to?(:[]) && (@status == 500 || (@status.to_s =~ /20./ && request.get?))
+          if html? && @response.respond_to?(:[]) && (@status == 500 || (@status.to_s =~ /20./ && request.get?))
             new_response = make_new_response(@response[0])
             @headers['Content-Length'] = new_response.bytesize.to_s
             @response = [new_response]
           end
-
-          # binding.pry
 
           [@status, @headers, @response]
         end
@@ -41,6 +37,10 @@ module RailsLiveReload
 
       def make_new_response(body)
         body.sub("</head>", "</head>#{RailsLiveReload::Helper.rails_live_reload}")
+      end
+
+      def html?
+        @headers["Content-Type"].include? "text/html"
       end
 
     end
