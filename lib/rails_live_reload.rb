@@ -1,6 +1,6 @@
 require "listen"
 require "rails_live_reload/version"
-require "rails_live_reload/helper"
+require "rails_live_reload/client"
 require "rails_live_reload/rails/middleware"
 require "rails_live_reload/instrument/metrics_collector"
 require "rails_live_reload/thread/current_request"
@@ -13,6 +13,9 @@ module RailsLiveReload
 
   mattr_accessor :watcher
   @@watcher = nil
+
+  mattr_accessor :url
+  @@url = "/rails/live/reload"
 
   class Watcher
 

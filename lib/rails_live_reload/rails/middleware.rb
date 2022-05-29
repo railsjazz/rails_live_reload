@@ -12,14 +12,8 @@ module RailsLiveReload
       def call!(env)
         request = Rack::Request.new(env)
 
-        if env["REQUEST_PATH"] == "/xxx"
-
-          [
-            200,
-            { 'Content-Type' => 'application/json' },
-            [ RailsLiveReload::Command.new(request.params).command.to_json ]
-          ]
-
+        if env["REQUEST_PATH"] == RailsLiveReload.url
+          rails_live_response(request)
         else
           @status, @headers, @response = @app.call(env)
 
@@ -35,12 +29,20 @@ module RailsLiveReload
 
       private
 
+      def rails_live_response(request)
+        [
+          200,
+          { 'Content-Type' => 'application/json' },
+          [ RailsLiveReload::Command.new(request.params).command.to_json ]
+        ]
+      end
+
       def make_new_response(body)
-        body.sub("</head>", "</head>#{RailsLiveReload::Helper.rails_live_reload}")
+        body.sub("</head>", "</head>#{RailsLiveReload::Client.js_code}")
       end
 
       def html?
-        @headers["Content-Type"].include? "text/html"
+        @headers["Content-Type"].include?("text/html")
       end
 
     end

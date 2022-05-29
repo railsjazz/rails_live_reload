@@ -1,12 +1,6 @@
 module RailsLiveReload
   class Railtie < ::Rails::Engine
 
-    initializer 'rails_live_reload.helpers' do
-      ActiveSupport.on_load :action_view do
-        #include RailsLiveReload::Helper
-      end
-    end
-
     initializer "rails_live_reload.middleware" do |app|
       if ::Rails::VERSION::MAJOR.to_i >= 5
         app.middleware.insert_after ActionDispatch::Executor, RailsLiveReload::Rails::Middleware

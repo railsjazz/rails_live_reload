@@ -10,7 +10,7 @@ module RailsLiveReload
     def command
       result = []
 
-      # from view
+      # from list of files rendered in view
       files_to_check = RailsLiveReload.files.slice(*files)
       files_to_check.each do |file, fdt|
         result << file if fdt && fdt > dt

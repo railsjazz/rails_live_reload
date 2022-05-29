@@ -1,8 +1,7 @@
 module RailsLiveReload
   class CurrentRequest
+    attr_accessor :data, :record
     attr_reader :request_id
-    attr_accessor :data
-    attr_accessor :record
 
     def CurrentRequest.init
       Thread.current[:rc_current_request] ||= CurrentRequest.new(SecureRandom.hex(16))
