@@ -72,6 +72,7 @@ You are welcome to contribute.
 - generator for initializer
 - check how it works with webpacker/importmaps/etc
 - maybe complex rules, e.g. if "user.rb" file is changed - automatically reload all "users" views
+- check with older Rails versions
 
 ## License
 
