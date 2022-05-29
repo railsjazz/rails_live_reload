@@ -5,7 +5,7 @@ module RailsLiveReload
       %Q{
         <script>
           const files = #{CurrentRequest.current.data.to_a.to_json};
-          setInterval(
+          const timer = setInterval(
             () => {
               const formData = new FormData();
               formData.append('dt', #{Time.now.to_i})
@@ -22,7 +22,8 @@ module RailsLiveReload
                 .then(response => response.json())
                 .then(data => {
                   if(data['command'] === 'RELOAD') {
-                    window.location.reload()
+                    clearInterval(timer);
+                    window.location.reload();
                   }
                 })
             }, #{RailsLiveReload.timeout}
