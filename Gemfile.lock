@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails_live_reload (0.1.0)
+    rails_live_reload (0.0.1)
       listen
       rails
 

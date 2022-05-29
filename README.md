@@ -16,7 +16,7 @@ Page is reloaded with `window.location.reload()` so it's the most robust way to 
 
 ## Usage
 
-Just add gem to the Gemfile (in development environment).
+Just add this gem to the Gemfile (in development environment) and start the `rails s`.
 
 ## Installation
 
@@ -63,7 +63,7 @@ There are 3 main pieces how it works:
 
 ## Contributing
 
-You are welcome to contribute. 
+You are welcome to contribute. See list of `TODO's` below.
 
 ## TODO
 
@@ -73,6 +73,8 @@ You are welcome to contribute.
 - check how it works with webpacker/importmaps/etc
 - maybe complex rules, e.g. if "user.rb" file is changed - automatically reload all "users" views
 - check with older Rails versions
+- tests or specs
+- CI (github actions)
 
 ## License
 
