@@ -22,6 +22,9 @@ module RailsLiveReload
   mattr_accessor :patterns
   @@patterns = {}
 
+  mattr_accessor :timeout
+  @@timeout = 100
+
   def self.setup
     yield(self)
   end
@@ -33,11 +36,6 @@ end
 
 # default watch settings
 RailsLiveReload.setup do |config|
-  # app
   config.watch %r{app/views/.+\.(erb|haml|slim)$}
-  config.watch %r{(app|vendor)/(assets|javascripts)/\w+/(.+\.(css|js|html|png|jpg|ts|jsx)).*}, reload: :always
-  # config.watch %r{app/helpers/.+\.rb}, reload: :always
-  # config.watch %r{config/locales/.+\.yml}, reload: :always
-
-  # # Rails Assets Pipeline
+  config.watch %r{(app|vendor)/(assets|javascript)/\w+/(.+\.(css|js|html|png|jpg|ts|jsx)).*}, reload: :always
 end

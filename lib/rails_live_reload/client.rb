@@ -25,7 +25,7 @@ module RailsLiveReload
                     window.location.reload()
                   }
                 })
-            }, 100
+            }, #{RailsLiveReload.timeout}
           )
         </script>
         }.html_safe

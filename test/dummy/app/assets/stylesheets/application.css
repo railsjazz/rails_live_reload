@@ -26,6 +26,20 @@ ul li {
 
 hr {
   margin: 1rem 0;
-  border-color: yellow;
+  border-color: rgb(36, 39, 43);
   border-width: 2px;
+}
+
+a {
+  color: purple;
+  padding: 0.5rem 1rem;
+}
+
+a:hover {
+  background-color: purple;
+  color: white;
+}
+
+button[type="submit"] {
+  margin-top: 1rem;
 }
