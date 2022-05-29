@@ -8,20 +8,9 @@ module RailsLiveReload
     end
 
     def command
-      result = []
+      changes = RailsLiveReload::Checker.scan(dt, files)
 
-      # from list of files rendered in view
-      files_to_check = RailsLiveReload.files.slice(*files)
-      files_to_check.each do |file, fdt|
-        result << file if fdt && fdt > dt
-      end
-
-      # from css
-      RailsLiveReload.files.each do |file, fdt|
-        result << file if fdt && fdt > dt && (file.ends_with?(".css") || file.ends_with?(".js"))
-      end
-      
-      if result.size == 0
+      if changes.size == 0
         { command: "NO_CHANGES" }
       else
         { command: "RELOAD" }

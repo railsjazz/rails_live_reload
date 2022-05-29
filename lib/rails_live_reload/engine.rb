@@ -12,9 +12,7 @@ module RailsLiveReload
         end
       end
 
-      RailsLiveReload::Watcher.new(
-        folder: (app.root.to_s + "/app")
-      )
+      RailsLiveReload::Watcher.init
     end
 
     initializer :configure_metrics, after: :initialize_logger do

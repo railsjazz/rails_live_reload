@@ -21,12 +21,11 @@ module RailsLiveReload
               )
                 .then(response => response.json())
                 .then(data => {
-                  console.log(data)
                   if(data['command'] === 'RELOAD') {
                     window.location.reload()
                   }
                 })
-            }, 1000
+            }, 100
           )
         </script>
         }.html_safe

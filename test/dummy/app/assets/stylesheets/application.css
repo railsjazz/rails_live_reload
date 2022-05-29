@@ -1,5 +1,31 @@
 /* Application styles */
 
+body {
+  font-family: Consolas;
+  background: linear-gradient(to top right, #e7bbbb, #9198e5);
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  padding: 140px;
+}
+
 .container {
-  color: red;
+  color: black;
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  font-size: 2rem;
+}
+
+ul li {
+  margin-right: 3rem;
+}
+
+hr {
+  margin: 1rem 0;
+  border-color: yellow;
+  border-width: 2px;
 }

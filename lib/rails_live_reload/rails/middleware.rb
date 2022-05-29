@@ -25,6 +25,10 @@ module RailsLiveReload
 
           [@status, @headers, @response]
         end
+      rescue Exception => ex
+        puts ex.message
+        puts ex.backtrace.take(10)
+        raise ex
       end
 
       private
