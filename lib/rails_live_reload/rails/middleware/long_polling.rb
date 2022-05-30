@@ -4,6 +4,9 @@ module RailsLiveReload
       class LongPolling < Base
         private
 
+        POLLING_SLEEP = 0.2
+        MAX_TIMES_TO_RESET_CONNECTIONS = 140
+
         def rails_live_response(request)
           params = request.params
           body = lambda do |stream|
@@ -17,10 +20,10 @@ module RailsLiveReload
                   stream.write(command.payload.to_json) and break
                 end
 
-                sleep 0.2
+                sleep(POLLING_SLEEP)
                 counter += 1
 
-                stream.write(command.payload.to_json) and break if counter >= 140
+                stream.write(command.payload.to_json) and break if counter >= MAX_TIMES_TO_RESET_CONNECTIONS
               end
             ensure
               stream.close
