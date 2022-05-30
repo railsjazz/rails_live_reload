@@ -1,7 +1,7 @@
 module RailsLiveReload
-  class Client
+  module Client
 
-    def Client.js_code
+    def Client.long_poling_js
       <<~HTML.html_safe
         <script>
           (function() {
@@ -13,7 +13,7 @@ module RailsLiveReload
               formData.append('files', JSON.stringify(files))
 
               fetch(
-                "#{RailsLiveReload.url}", 
+                "#{RailsLiveReload.config.url}", 
                 {
                   method: "post",
                   headers: { 'Accept': 'application/json', },
@@ -42,5 +42,34 @@ module RailsLiveReload
       HTML
     end
 
+    def Client.poling_js
+      <<~HTML.html_safe
+        <script>
+          const files = #{CurrentRequest.current.data.to_a.to_json};
+          const timer = setInterval(
+            () => {
+              const formData = new FormData();
+              formData.append('dt', #{Time.now.to_i})
+              formData.append('files', JSON.stringify(files))
+              fetch(
+                "#{RailsLiveReload.config.url}", 
+                {
+                  method: "post",
+                  headers: { 'Accept': 'application/json', },
+                  body: formData
+                }
+              )
+                .then(response => response.json())
+                .then(data => {
+                  if(data['command'] === 'RELOAD') {
+                    clearInterval(timer);
+                    window.location.reload();
+                  }
+                })
+            }, #{RailsLiveReload.config.poling_interval}
+          )
+        </script>
+      HTML
+    end
   end
 end

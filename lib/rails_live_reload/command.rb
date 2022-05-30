@@ -15,7 +15,7 @@ module RailsLiveReload
       !changes.size.zero?
     end
 
-    def command
+    def payload
       if reload?
         { command: "RELOAD" }
       else
