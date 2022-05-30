@@ -1,7 +1,7 @@
 module RailsLiveReload
   module Client
 
-    def Client.long_poling_js
+    def Client.long_polling_js
       <<~HTML.html_safe
         <script>
           (function() {
@@ -42,7 +42,7 @@ module RailsLiveReload
       HTML
     end
 
-    def Client.poling_js
+    def Client.polling_js
       <<~HTML.html_safe
         <script>
           const files = #{CurrentRequest.current.data.to_a.to_json};
@@ -66,7 +66,7 @@ module RailsLiveReload
                     window.location.reload();
                   }
                 })
-            }, #{RailsLiveReload.config.poling_interval}
+            }, #{RailsLiveReload.config.polling_interval}
           )
         </script>
       HTML

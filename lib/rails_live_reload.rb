@@ -3,8 +3,9 @@ require "rails_live_reload/version"
 require "rails_live_reload/config"
 require "rails_live_reload/client"
 require "rails_live_reload/watcher"
-require "rails_live_reload/rails/middleware/long_poling"
-require "rails_live_reload/rails/middleware/poling"
+require "rails_live_reload/rails/middleware/base"
+require "rails_live_reload/rails/middleware/long_polling"
+require "rails_live_reload/rails/middleware/polling"
 require "rails_live_reload/instrument/metrics_collector"
 require "rails_live_reload/thread/current_request"
 require "rails_live_reload/checker"
@@ -17,8 +18,8 @@ module RailsLiveReload
 
   def self.middleware
     case config.mode
-    when :poling then RailsLiveReload::Rails::Middleware::Poling
-    when :long_poling then RailsLiveReload::Rails::Middleware::LongPoling
+    when :polling then RailsLiveReload::Rails::Middleware::Polling
+    when :long_polling then RailsLiveReload::Rails::Middleware::LongPolling
     end
   end
 end
