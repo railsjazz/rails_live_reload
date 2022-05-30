@@ -2,11 +2,12 @@ module RailsLiveReload
   class Client
 
     def Client.js_code
-      %Q{
+      <<~HTML.html_safe
         <script>
-          const files = #{CurrentRequest.current.data.to_a.to_json};
-          const timer = setInterval(
-            () => {
+          (function() {
+            const files = #{CurrentRequest.current.data.to_a.to_json};
+            let retries_count = 0;
+            function poll() {
               const formData = new FormData();
               formData.append('dt', #{Time.now.to_i})
               formData.append('files', JSON.stringify(files))
@@ -21,15 +22,24 @@ module RailsLiveReload
               )
                 .then(response => response.json())
                 .then(data => {
+                  retries_count = 0;
                   if(data['command'] === 'RELOAD') {
-                    clearInterval(timer);
                     window.location.reload();
+                  } else {
+                    poll();
+                  }
+                }).catch(() => {
+                  retries_count++;
+
+                  if(retries_count < 10) {
+                    setTimeout(poll, 5000)
                   }
                 })
-            }, #{RailsLiveReload.timeout}
-          )
+            }
+            poll();
+          })();
         </script>
-        }.html_safe
+      HTML
     end
 
   end

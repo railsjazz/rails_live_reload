@@ -34,11 +34,29 @@ module RailsLiveReload
       private
 
       def rails_live_response(request)
-        [
-          200,
-          { 'Content-Type' => 'application/json' },
-          [ RailsLiveReload::Command.new(request.params).command.to_json ]
-        ]
+        params = request.params
+        body = lambda do |stream|
+          new_thread do
+            counter = 0
+
+            loop do
+              command = RailsLiveReload::Command.new(params)
+
+              if command.reload?
+                stream.write({ command: "RELOAD" }.to_json) and break
+              end
+
+              sleep 0.5
+              counter += 1
+
+              stream.write({ command: "NO_CHANGES" }.to_json) and break if counter >= 40
+            end
+          ensure
+            stream.close
+          end
+        end
+
+        [ 200, { 'Content-Type' => 'application/json', 'rack.hijack' => body }, nil ]
       end
 
       def make_new_response(body)
@@ -49,6 +67,13 @@ module RailsLiveReload
         @headers["Content-Type"].to_s.include?("text/html")
       end
 
+      def new_thread
+        Thread.new {
+          t2 = Thread.current
+          t2.abort_on_exception = true
+          yield
+        }
+      end
     end
   end
 end
