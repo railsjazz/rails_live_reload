@@ -4,7 +4,7 @@ module RailsLiveReload
 
     def initialize(params)
       @dt    = params["dt"].to_i
-      @files = JSON.parse(params["files"])
+      @files = JSON.parse(params["files"]) rescue []
     end
 
     def changes
