@@ -19,12 +19,12 @@ module RailsLiveReload
 
   class Config
     attr_reader :patterns
-    attr_accessor :mode, :poling_interval, :url, :watcher, :files, :enabled
+    attr_accessor :mode, :polling_interval, :url, :watcher, :files, :enabled
 
     def initialize
-      @mode = :long_poling
+      @mode = :long_polling
       @patterns = {}
-      @poling_interval = 100
+      @polling_interval = 100
       @url = "/rails/live/reload"
       @watcher = nil
       @files = {}

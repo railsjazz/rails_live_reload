@@ -1,7 +1,7 @@
 module RailsLiveReload
   module Rails
     module Middleware
-      class Poling
+      class Base
         def initialize(app)
           @app = app
         end
@@ -35,19 +35,27 @@ module RailsLiveReload
         private
 
         def rails_live_response(request)
-          [
-            200,
-            { 'Content-Type' => 'application/json' },
-            [ RailsLiveReload::Command.new(request.params).payload.to_json ]
-          ]
+          raise NotImplementedError
+        end
+
+        def client_javascript(request)
+          raise NotImplementedError
         end
 
         def make_new_response(body)
-          body.sub("</head>", "</head>#{RailsLiveReload::Client.poling_js}")
+          body.sub("</head>", "</head>#{client_javascript}")
         end
 
         def html?
           @headers["Content-Type"].to_s.include?("text/html")
+        end
+
+        def new_thread
+          Thread.new {
+            t2 = Thread.current
+            t2.abort_on_exception = true
+            yield
+          }
         end
       end
     end
