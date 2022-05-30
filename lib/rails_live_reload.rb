@@ -24,8 +24,7 @@ module RailsLiveReload
   end
 end
 
-# Default configuration for 95% apps this is valid
-# for the rest - check the README
+# These configs work for 95% apps, see README for more info
 RailsLiveReload.configure do |config|
   config.watch %r{app/views/.+\.(erb|haml|slim)$}
   config.watch %r{(app|vendor)/(assets|javascript)/\w+/(.+\.(css|js|html|png|jpg|ts|jsx)).*}, reload: :always
