@@ -25,6 +25,9 @@ module RailsLiveReload
   mattr_accessor :timeout
   @@timeout = 100
 
+  mattr_accessor :enabled
+  @@enabled = true
+
   def self.setup
     yield(self)
   end
@@ -32,6 +35,10 @@ module RailsLiveReload
   def self.watch(pattern, reload: :on_change)
     RailsLiveReload.patterns[pattern] = reload
   end
+end
+
+if defined?(IRB)
+  RailsLiveReload.enabled = false
 end
 
 # default watch settings
