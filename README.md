@@ -13,10 +13,13 @@ Works with:
 - views (EBR/HAML/SLIM) (reloading page only if you editing views which were rendered)
 - partials
 - CSS/JS
-- helpers, locales (if you configure)
+- helpers (if you configured)
+- YAML locales (if you configured)
 - on a "crash" page, so once you made a fix page it will be reloaded
 
 Page is reloaded with `window.location.reload()` so it's the most robust way to reload the page because of CSS/JS/etc.
+
+Gem reloads page only when the rendered views are changed.
 
 ## Usage
 
@@ -79,6 +82,7 @@ You are welcome to contribute. See list of `TODO's` below.
 - check with older Rails versions
 - tests or specs
 - CI (github actions)
+- improve how JS code is injected into HTML
 
 ## License
 
