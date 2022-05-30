@@ -7,13 +7,19 @@ module RailsLiveReload
       @files = JSON.parse(params["files"])
     end
 
-    def command
-      changes = RailsLiveReload::Checker.scan(dt, files)
+    def changes
+      RailsLiveReload::Checker.scan(dt, files)
+    end
 
-      if changes.size == 0
-        { command: "NO_CHANGES" }
-      else
+    def reload?
+      !changes.size.zero?
+    end
+
+    def payload
+      if reload?
         { command: "RELOAD" }
+      else
+        { command: "NO_CHANGES" }
       end
     end
 

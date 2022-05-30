@@ -5,22 +5,16 @@ module RailsLiveReload
       temp = []
 
       # all changed files
-      RailsLiveReload.files.each do |file, fdt|
+      RailsLiveReload.watcher.files.each do |file, fdt|
         temp << file if fdt && fdt > dt
       end
-
-     # ::Rails.logger.info "Changed: #{temp}"
 
       result = []
 
       temp.each do |file|
-       # ::Rails.logger.info "Checking: #{file}"
         RailsLiveReload.patterns.each do |pattern, rule|
-          #puts "pattern = #{pattern} & rule = #{rule}"
-          # 1. CSS, JS, yaml, helper .rb
-          # 2. checking if rendered file
-          rule_1 = file.match(pattern) && rule == :always
-          rule_2 = file.match(pattern) && rendered_files.include?(file)
+          rule_1 = file.match(pattern) && rule == :always # Used for CSS, JS, yaml, helpers, etc.
+          rule_2 = file.match(pattern) && rendered_files.include?(file) # Used to check if view was rendered
 
           if rule_1 || rule_2
             result << file

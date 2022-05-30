@@ -1,4 +1,4 @@
-RailsLiveReload.setup do |config|
+RailsLiveReload.configure do |config|
   # app
   # config.watch %r{app/views/.+\.(erb|haml|slim)$}, reload: :on_change
   # config.watch %r{app/helpers/.+\.rb}, reload: :always

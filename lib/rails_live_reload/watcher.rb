@@ -1,6 +1,6 @@
 module RailsLiveReload
   class Watcher
-    attr_reader :root
+    attr_reader :root, :files
 
     def Watcher.init
       watcher = new
@@ -9,12 +9,15 @@ module RailsLiveReload
 
     def initialize
       @root = ::Rails.application.root
+      @files = {}
+
       puts "Watching: #{root}"
       RailsLiveReload.patterns.each do |pattern, rule|
         puts "  #{pattern} => #{rule}" 
       end
-      self.build_tree
-      self.start_listener
+
+      build_tree
+      start_listener
     end
 
     def start_listener
@@ -22,7 +25,7 @@ module RailsLiveReload
         listener = Listen.to(root) do |modified, added, removed|
           all = modified + added + removed
           all.each do |file|
-            RailsLiveReload.files[file] = File.mtime(file).to_i rescue nil
+            files[file] = File.mtime(file).to_i rescue nil
           end
         end
         listener.start
@@ -31,7 +34,7 @@ module RailsLiveReload
 
     def build_tree
       Dir.glob(File.join(root, '**', '*')).select{|file| File.file?(file)}.each do |file|
-        RailsLiveReload.files[file] = File.mtime(file).to_i rescue nil
+        files[file] = File.mtime(file).to_i rescue nil
       end
     end
   end
