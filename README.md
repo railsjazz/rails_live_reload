@@ -1,5 +1,9 @@
 # Rails Live Reload
 
+[![RailsJazz](https://github.com/igorkasyanchuk/rails_time_travel/blob/main/docs/my_other.svg?raw=true)](https://www.railsjazz.com)
+
+![RailsLiveReload](docs/rails_live_reload.gif)
+
 This is the simplest and probably the most robust way to add a support for a live reload to your Rails app.
 
 Just add the gem and thats all - congratulation, now you have a live reload. No 3rd party dependencies.
