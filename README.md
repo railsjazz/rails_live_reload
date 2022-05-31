@@ -53,6 +53,10 @@ RailsLiveReload.configure do |config|
   # Available modes are: :long_polling (default) and :polling
   # config.mode = :long_polling
 
+  # This is used with :long_polling mode
+  # config.timeout = 30
+  # config.long_polling_sleep_duration = 0.1
+
   # This is used with :polling mode
   # config.polling_interval = 100
 
