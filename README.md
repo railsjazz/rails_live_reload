@@ -4,22 +4,20 @@
 
 ![RailsLiveReload](docs/rails_live_reload.gif)
 
-This is the simplest and probably the most robust way to add a support for a live reload to your Rails app.
+This is the simplest and probably the most robust way to add live reloading to your Rails app.
 
-Just add the gem and thats all - congratulation, now you have a live reload. No 3rd party dependencies.
+Just add the gem and thats it, now you have a live reloading. No 3rd party dependencies.
 
 Works with:
 
-- views (EBR/HAML/SLIM) (reloading page only if you editing views which were rendered)
+- views (EBR/HAML/SLIM) (the page is reloaded only when changed views which were rendered on the page)
 - partials
 - CSS/JS
-- helpers (if you configured)
-- YAML locales (if you configured)
-- on a "crash" page, so once you made a fix page it will be reloaded
+- helpers (if configured)
+- YAML locales (if configured)
+- on the "crash" page, so it will be reloaded as soon as you make a fix
 
-Page is reloaded with `window.location.reload()` so it's the most robust way to reload the page because of CSS/JS/etc.
-
-Gem reloads page only when the rendered views are changed.
+The page is reloaded fully with `window.location.reload()` to make sure that every chage will be displayed.
 
 ## Usage
 
@@ -42,31 +40,43 @@ $ bundle
 
 ## Configuration
 
-Default configuration `config/initializers/rails_live_reload.rb`:
+### There are two modes:
+1. `:long_polling` - This is a default mode, it uses [long polling](https://javascript.info/long-polling) techunique, client opens a connection that will hang until either change is detected, or timeout happens, if later, a new connection is oppened
+2. `:polling` - This mode will use regular polling to detect changes, you can configure custom `polling_interval` (default is 100ms). We recommend using `:long_polling` as it makes much less requests to the server.
+
+### Create initializer `config/initializers/rails_live_reload.rb`:
 
 
 ```ruby
-RailsLiveReload.setup do |config|
-  config.url     = "/rails/live/reload"
-  config.timeout = 100
+RailsLiveReload.configure do |config|
+  # config.url     = "/rails/live/reload"
+  # Available modes are: :long_polling (default) and :polling
+  # config.mode = :long_polling
 
-  # Watched folders & files
-  config.watch %r{app/views/.+\.(erb|haml|slim)$}
-  config.watch %r{(app|vendor)/(assets|javascript)/\w+/(.+\.(css|js|html|png|jpg|ts|jsx)).*}, reload: :always
-  
+  # This is used with :polling mode
+  # config.polling_interval = 100
+
+  # Default watched folders & files
+  # config.watch %r{app/views/.+\.(erb|haml|slim)$}
+  # config.watch %r{(app|vendor)/(assets|javascript)/\w+/(.+\.(css|js|html|png|jpg|ts|jsx)).*}, reload: :always
+
   # More examples:
   # config.watch %r{app/helpers/.+\.rb}, reload: :always
   # config.watch %r{config/locales/.+\.yml}, reload: :always
-end
+end if defined?(RailsLiveReload)
 ```
 
 ## How it works
 
-There are 3 main pieces how it works:
+There are 3 main parts:
 
-1) listener for file changes using `listen` gem
+1) listener of file changes (using `listen` gem)
 2) collector of rendered views (see rails instrumentation)
-3) middleware which is responding to setInterval JS calls
+3) middleware which is responding to polling JS calls
+
+## Notes
+
+The default configuration assumes that you either use asset pipeline, or that your assets compile quickly (on most applications asset compilation takes around 50-200ms), so it watches for changes in `app/assets` and `app/javascript` folders, this will not be a problem for 99% of users, but in case your asset compilation takes couple of seconds, this might not work propperly, in that case we would recommend you to add configuration to watch output folder.
 
 ## Contributing
 
@@ -75,10 +85,10 @@ You are welcome to contribute. See list of `TODO's` below.
 ## TODO
 
 - reload CSS without reloading the whole page?
+- add `:websocket` mode?
 - smarter reload if there is a change in helper (check methods from rendered views?)
 - generator for initializer
-- check how it works with webpacker/importmaps/etc
-- maybe complex rules, e.g. if "user.rb" file is changed - automatically reload all "users" views
+- more complex rules? e.g. if "user.rb" file is changed - reload all pages with rendered "users" views
 - check with older Rails versions
 - tests or specs
 - CI (github actions)
