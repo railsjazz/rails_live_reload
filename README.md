@@ -93,6 +93,7 @@ You are welcome to contribute. See list of `TODO's` below.
 - tests or specs
 - CI (github actions)
 - improve how JS code is injected into HTML
+- improve work with turbo, turbolinks
 
 ## License
 
