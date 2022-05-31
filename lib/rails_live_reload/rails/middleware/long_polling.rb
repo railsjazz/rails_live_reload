@@ -4,8 +4,6 @@ module RailsLiveReload
       class LongPolling < Base
         private
 
-        POLLING_SLEEP = 0.1
-
         def rails_live_response(request)
           params = request.params
           body = lambda do |stream|
@@ -19,7 +17,7 @@ module RailsLiveReload
                   stream.write(command.payload.to_json) and break
                 end
 
-                sleep(POLLING_SLEEP)
+                sleep(RailsLiveReload.config.long_polling_sleep_duration)
                 counter += 1
 
                 stream.write(command.payload.to_json) and break if counter >= max_sleeps_count
@@ -37,7 +35,7 @@ module RailsLiveReload
         end
 
         def max_sleeps_count
-          RailsLiveReload.config.timeout * (1 / POLLING_SLEEP)
+          RailsLiveReload.config.timeout * (1 / RailsLiveReload.config.long_polling_sleep_duration)
         end
 
         def new_thread

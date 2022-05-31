@@ -19,20 +19,32 @@ module RailsLiveReload
 
   class Config
     attr_reader :patterns
-    attr_accessor :mode, :polling_interval, :timeout, :url, :watcher, :files, :enabled
+    attr_accessor :mode, :polling_interval, :timeout, :url, :watcher, :files, :enabled, :long_polling_sleep_duration
 
     def initialize
       @mode = :long_polling
       @timeout = 30
-      @patterns = {}
+      @long_polling_sleep_duration = 0.1
       @polling_interval = 100
       @url = "/rails/live/reload"
       @watcher = nil
       @files = {}
       @enabled = ::Rails.env.development? && !defined?(Rails::Console)
+
+      # These configs work for 95% apps, see README for more info
+      @patterns = {
+        %r{app/views/.+\.(erb|haml|slim)$} => :on_change,
+        %r{(app|vendor)/(assets|javascript)/\w+/(.+\.(css|js|html|png|jpg|ts|jsx)).*} => :always
+      }
+      @default_patterns_changed = false
     end
 
     def watch(pattern, reload: :on_change)
+      unless @default_patterns_changed
+        @default_patterns_changed = true
+        @patterns = {}
+      end
+
       patterns[pattern] = reload
     end
   end
