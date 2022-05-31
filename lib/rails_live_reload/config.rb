@@ -19,16 +19,17 @@ module RailsLiveReload
 
   class Config
     attr_reader :patterns
-    attr_accessor :mode, :polling_interval, :url, :watcher, :files, :enabled
+    attr_accessor :mode, :polling_interval, :timeout, :url, :watcher, :files, :enabled
 
     def initialize
       @mode = :long_polling
+      @timeout = 30
       @patterns = {}
       @polling_interval = 100
       @url = "/rails/live/reload"
       @watcher = nil
       @files = {}
-      @enabled = ::Rails.env.development? && !defined?(IRB)
+      @enabled = ::Rails.env.development? && !defined?(Rails::Console)
     end
 
     def watch(pattern, reload: :on_change)
