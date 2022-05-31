@@ -6,7 +6,7 @@ module RailsLiveReload
 
       # all changed files
       RailsLiveReload.watcher.files.each do |file, fdt|
-        temp << file if fdt && fdt > dt
+        temp << file if fdt[:timestamp] && fdt[:timestamp] > dt
       end
 
       result = []
