@@ -67,6 +67,8 @@ RailsLiveReload.configure do |config|
   # More examples:
   # config.watch %r{app/helpers/.+\.rb}, reload: :always
   # config.watch %r{config/locales/.+\.yml}, reload: :always
+
+  # config.enabled = Rails.env.development?
 end if defined?(RailsLiveReload)
 ```
 
