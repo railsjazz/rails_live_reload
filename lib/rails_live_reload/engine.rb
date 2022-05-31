@@ -1,7 +1,7 @@
 module RailsLiveReload
   class Railtie < ::Rails::Engine
 
-    if RailsLiveReload.enabled?
+    if RailsLiveReload.enabled? && defined?(::Rails::Server)
       initializer "rails_live_reload.middleware" do |app|
         if ::Rails::VERSION::MAJOR.to_i >= 5
           app.middleware.insert_after ActionDispatch::Executor, RailsLiveReload.middleware
