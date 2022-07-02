@@ -4,7 +4,7 @@ module RailsLiveReload
       class Polling < Base
         private
 
-        def rails_live_response(request)
+        def main_rails_live_response(request)
           [
             200,
             { 'Content-Type' => 'application/json' },
@@ -12,8 +12,8 @@ module RailsLiveReload
           ]
         end
 
-        def client_javascript
-          RailsLiveReload::Client.polling_js
+        def javascript_configs
+          { polling_interval: RailsLiveReload.config.polling_interval }
         end
       end
     end

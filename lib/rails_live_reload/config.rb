@@ -22,7 +22,7 @@ module RailsLiveReload
     attr_accessor :mode, :polling_interval, :timeout, :url, :watcher, :files, :enabled, :long_polling_sleep_duration
 
     def initialize
-      @mode = :long_polling
+      @mode = :sse
       @timeout = 30
       @long_polling_sleep_duration = 0.1
       @polling_interval = 100
