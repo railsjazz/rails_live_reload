@@ -16,6 +16,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rails"
   spec.add_dependency "listen"
+  spec.add_dependency "faye-websocket"
   spec.add_development_dependency "puma"
   spec.add_development_dependency "pry"
   spec.add_development_dependency "pry-nav"

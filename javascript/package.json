@@ -1,0 +1,16 @@
+{
+  "name": "rails_live_reload",
+  "version": "0.1.2",
+  "repository": "https://github.com/railsjazz/rails_live_reload.git",
+  "author": "www.railsjazz.com",
+  "license": "MIT",
+  "scripts": {
+    "build": "rollup -c",
+    "watch": "rollup -wc"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "rollup": "^2.71.1",
+    "rollup-plugin-terser": "^7.0.2"
+  }
+}

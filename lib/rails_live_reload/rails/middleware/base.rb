@@ -13,8 +13,12 @@ module RailsLiveReload
         def call!(env)
           request = Rack::Request.new(env)
 
-          if env["REQUEST_PATH"] == RailsLiveReload.config.url
-            rails_live_response(request)
+          case env["REQUEST_PATH"]
+          when RailsLiveReload.config.url
+            main_rails_live_response(request)
+          when "#{RailsLiveReload.config.url}/script"
+            content = client_javascript
+            [200, {'Content-Type' => 'application/javascript', 'Content-Length' => content.size.to_s, 'Cache-Control' => 'no-store'}, [content]]
           else
             @status, @headers, @response = @app.call(env)
 
@@ -34,16 +38,34 @@ module RailsLiveReload
 
         private
 
-        def rails_live_response(request)
+        def main_rails_live_response(request)
           raise NotImplementedError
         end
 
-        def client_javascript(request)
-          raise NotImplementedError
+        def client_javascript
+          File.open(File.join(File.dirname(__FILE__), "../javascript/#{RailsLiveReload.config.mode}.js")).read
         end
 
         def make_new_response(body)
-          body.sub("</head>", "</head>#{client_javascript}")
+          body = body.sub("</head>", <<~HTML.html_safe)
+            <script async type="text/javascript" src="#{RailsLiveReload.config.url}/script"></script>
+            </head>
+          HTML
+          body.sub("</body>", <<~HTML.html_safe)
+            <script id="rails-live-reload-options" type="application/json">
+              #{{
+                files: CurrentRequest.current.data.to_a,
+                time: Time.now.to_i,
+                url: RailsLiveReload.config.url,
+                options: javascript_options
+              }.to_json}
+            </script>
+            </body>
+          HTML
+        end
+
+        def javascript_options
+          {}
         end
 
         def html?

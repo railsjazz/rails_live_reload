@@ -4,7 +4,7 @@ module RailsLiveReload
       class LongPolling < Base
         private
 
-        def rails_live_response(request)
+        def main_rails_live_response(request)
           params = request.params
           body = lambda do |stream|
             new_thread do
@@ -28,10 +28,6 @@ module RailsLiveReload
           end
 
           [ 200, { 'Content-Type' => 'application/json', 'rack.hijack' => body }, nil ]
-        end
-
-        def client_javascript
-          RailsLiveReload::Client.long_polling_js
         end
 
         def max_sleeps_count
