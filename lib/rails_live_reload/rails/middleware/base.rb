@@ -43,7 +43,7 @@ module RailsLiveReload
         end
 
         def client_javascript
-          File.open(File.join(File.dirname(__FILE__), "../javascript/#{RailsLiveReload.config.mode}.js")).read
+          @client_javascript ||= File.open(File.join(File.dirname(__FILE__), "../javascript/#{RailsLiveReload.config.mode}.js")).read
         end
 
         def make_new_response(body)
