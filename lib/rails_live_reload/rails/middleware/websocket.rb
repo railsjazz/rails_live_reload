@@ -5,10 +5,7 @@ module RailsLiveReload
         private
 
         def main_rails_live_response(request)
-          params = request.params
-
           connection = Connection.new(request.env)
-
           Connection.add_connection(connection)
 
           connection.rack_response
