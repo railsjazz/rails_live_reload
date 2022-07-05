@@ -6,7 +6,7 @@
 
 This is the simplest and probably the most robust way to add live reloading to your Rails app.
 
-Just add the gem and thats it, now you have a live reloading. **No 3rd party dependencies**.
+Just add the gem and thats it, now you have a live reloading. **You dont need anything other than this gem for live reloading to work**.
 
 Works with:
 
