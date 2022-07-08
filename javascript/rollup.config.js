@@ -17,7 +17,7 @@ export default [
     output: [
       {
         name: "RailsLiveReload",
-        file: "../lib/rails_live_reload/rails/javascript/polling.js",
+        file: "../lib/rails_live_reload/javascript/polling.js",
         format: "iife",
         banner: banner,
         plugins: [terser()],
@@ -33,7 +33,7 @@ export default [
     output: [
       {
         name: "RailsLiveReload",
-        file: "../lib/rails_live_reload/rails/javascript/long_polling.js",
+        file: "../lib/rails_live_reload/javascript/long_polling.js",
         format: "iife",
         banner: banner,
         plugins: [terser()],
@@ -49,7 +49,7 @@ export default [
     output: [
       {
         name: "RailsLiveReload",
-        file: "../lib/rails_live_reload/rails/javascript/websocket.js",
+        file: "../lib/rails_live_reload/javascript/websocket.js",
         format: "iife",
         banner: banner,
         plugins: [terser()],
