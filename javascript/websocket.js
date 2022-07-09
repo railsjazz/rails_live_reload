@@ -74,4 +74,6 @@ export default class RailsLiveReload extends Base {
   }
 }
 
-RailsLiveReload.start();
+document.addEventListener("DOMContentLoaded", () => {
+  RailsLiveReload.start();
+});

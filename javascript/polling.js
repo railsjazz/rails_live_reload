@@ -2,7 +2,7 @@ import Base, { COMMANDS } from "./base";
 
 export default class RailsLiveReload extends Base {
   start() {
-    if(this.interval) return;
+    if (this.interval) return;
 
     this.interval = setInterval(async () => {
       const formData = new FormData();
@@ -11,7 +11,7 @@ export default class RailsLiveReload extends Base {
       const response = await fetch(this.url, {
         method: "post",
         headers: { Accept: "application/json" },
-        body: formData
+        body: formData,
       });
 
       const data = await response.json();
@@ -31,6 +31,8 @@ export default class RailsLiveReload extends Base {
     clearInterval(this.interval);
     this.interval = undefined;
   }
-};
+}
 
-RailsLiveReload.start();
+document.addEventListener("DOMContentLoaded", () => {
+  RailsLiveReload.start();
+});

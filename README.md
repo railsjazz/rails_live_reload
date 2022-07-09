@@ -6,7 +6,7 @@
 
 This is the simplest and probably the most robust way to add live reloading to your Rails app.
 
-Just add the gem and thats it, now you have a live reloading. **You dont need anything other than this gem for live reloading to work**.
+Just add the gem and thats it, now you have a live reloading. **You don't need anything other than this gem for live reloading to work**.
 
 Works with:
 
@@ -100,7 +100,6 @@ You are welcome to contribute. See list of `TODO's` below.
 - check with older Rails versions
 - tests or specs
 - CI (github actions)
-- improve work with turbolinks
 
 ## License
 

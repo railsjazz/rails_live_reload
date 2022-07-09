@@ -12,7 +12,7 @@ export default class RailsLiveReload extends Base {
   }
 
   async poll(timestamp) {
-    if(this.timestamp !== timestamp) return;
+    if (this.timestamp !== timestamp) return;
     try {
       const formData = new FormData();
       formData.append("dt", this.time);
@@ -25,7 +25,7 @@ export default class RailsLiveReload extends Base {
       });
       const data = await response.json();
 
-      if(this.timestamp !== timestamp) return;
+      if (this.timestamp !== timestamp) return;
       this.retriesCount = 0;
       if (data.command === COMMANDS.RELOAD) {
         this.fullReload();
@@ -33,7 +33,7 @@ export default class RailsLiveReload extends Base {
         this.poll(timestamp);
       }
     } catch (error) {
-      if(this.timestamp !== timestamp) return;
+      if (this.timestamp !== timestamp) return;
       this.retriesCount++;
 
       if (this.retriesCount < 10) {
@@ -45,4 +45,6 @@ export default class RailsLiveReload extends Base {
   }
 }
 
-RailsLiveReload.start();
+document.addEventListener("DOMContentLoaded", () => {
+  RailsLiveReload.start();
+});

@@ -47,7 +47,7 @@ module RailsLiveReload
 
       def make_new_response(body)
         body = body.sub("</head>", <<~HTML.html_safe)
-          <script async type="text/javascript" src="#{RailsLiveReload.config.url}/script"></script>
+          <script defer type="text/javascript" src="#{RailsLiveReload.config.url}/script"></script>
           </head>
         HTML
         body.sub("</body>", <<~HTML.html_safe)

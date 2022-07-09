@@ -106,7 +106,7 @@ module RailsLiveReload
                 next unless monitor.readable?
               end
 
-              incoming = io.read_nonblock(4096, exception: true)
+              incoming = io.read_nonblock(4096, exception: false)
               case incoming
               when :wait_readable
                 next

@@ -1,12 +1,12 @@
 export const COMMANDS = {
-  RELOAD: 'RELOAD'
+  RELOAD: "RELOAD",
 };
 
 export default class Base {
   static _instance;
 
   static get instance() {
-    if(Base._instance) return Base._instance;
+    if (Base._instance) return Base._instance;
 
     Base._instance = new this();
     return Base._instance;
@@ -19,11 +19,22 @@ export default class Base {
   constructor() {
     this.initialize();
 
-    document.addEventListener('turbo:render', this.restart.bind(this));
+    document.addEventListener("turbo:render", () => {
+      if (document.documentElement.hasAttribute("data-turbo-preview")) return;
+
+      this.restart();
+    });
+    document.addEventListener("turbolinks:render", () => {
+      if (document.documentElement.hasAttribute("data-turbolinks-preview")) return;
+
+      this.restart();
+    });
   }
 
   initialize() {
-    const { files, time, url, options } = JSON.parse(this.optionsNode.textContent);
+    const { files, time, url, options } = JSON.parse(
+      this.optionsNode.textContent
+    );
 
     this.files = files;
     this.time = time;
@@ -32,11 +43,11 @@ export default class Base {
   }
 
   start() {
-    throw 'This should be implemented in subclass';
+    throw "This should be implemented in subclass";
   }
 
   stop() {
-    throw 'This should be implemented in subclass';
+    throw "This should be implemented in subclass";
   }
 
   restart() {
@@ -50,8 +61,8 @@ export default class Base {
   }
 
   get optionsNode() {
-    const node = document.getElementById('rails-live-reload-options');
-    if(!node) throw 'Unable to find RailsLiveReload options';
+    const node = document.getElementById("rails-live-reload-options");
+    if (!node) throw "Unable to find RailsLiveReload options";
 
     return node;
   }
