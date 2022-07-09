@@ -19,11 +19,13 @@ function createWebSocketURL(url) {
   }
 }
 
+const PROTOCOLS = ['rails-live-reload-v1-json'];
+
 export default class RailsLiveReload extends Base {
   start() {
     if (this.connection) return;
 
-    this.connection = new WebSocket(createWebSocketURL(this.url));
+    this.connection = new WebSocket(createWebSocketURL(this.url), PROTOCOLS);
     this.connection.onmessage = this.handleMessage.bind(this);
     this.connection.onopen = this.handleConnectionOpen.bind(this);
     this.connection.onclose = this.handleConnectionClosed.bind(this);
