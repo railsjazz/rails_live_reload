@@ -100,6 +100,7 @@ You are welcome to contribute. See list of `TODO's` below.
 - check with older Rails versions
 - tests or specs
 - CI (github actions)
+- auto reload when rendered controller was changed
 
 ## License
 
