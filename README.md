@@ -6,7 +6,7 @@
 
 This is the simplest and probably the most robust way to add live reloading to your Rails app.
 
-Just add the gem and thats it, now you have a live reloading. No 3rd party dependencies.
+Just add the gem and thats it, now you have a live reloading. **You don't need anything other than this gem for live reloading to work**.
 
 Works with:
 
@@ -40,9 +40,12 @@ $ bundle
 
 ## Configuration
 
-### There are two modes:
-1. `:long_polling` - This is a default mode, it uses [long polling](https://javascript.info/long-polling) techunique, client opens a connection that will hang until either change is detected, or timeout happens, if later, a new connection is oppened
-2. `:polling` - This mode will use regular polling to detect changes, you can configure custom `polling_interval` (default is 100ms). We recommend using `:long_polling` as it makes much less requests to the server.
+### There are three modes:
+1. `:websocket` - This is a default mode which uses websockets to trigger page reloading.
+2. `:long_polling` - **[Deprecated]** This mode uses [long polling](https://javascript.info/long-polling) techunique, client opens a connection that will hang until either change is detected, or timeout happens, if later, a new connection is oppened.
+3. `:polling` - **[Deprecated]** This mode will use regular polling to detect changes, you can configure custom `polling_interval` (default is 100ms). We recommend using `:long_polling` as it makes much less requests to the server.
+
+Keep in mind that `mode` configuration is **deprecated** and will be removed in the future, with `:websocket` be the only one available, in case you think that modes like `:long_polling` or `:polling` should be preserved feel free to open an issue.
 
 ### Create initializer `config/initializers/rails_live_reload.rb`:
 
@@ -50,8 +53,8 @@ $ bundle
 ```ruby
 RailsLiveReload.configure do |config|
   # config.url     = "/rails/live/reload"
-  # Available modes are: :long_polling (default) and :polling
-  # config.mode = :long_polling
+  # Available modes are: :websocket (default), :long_polling and :polling
+  # config.mode = :websocket
 
   # This is used with :long_polling mode
   # config.timeout = 30
@@ -78,7 +81,7 @@ There are 3 main parts:
 
 1) listener of file changes (using `listen` gem)
 2) collector of rendered views (see rails instrumentation)
-3) middleware which is responding to polling JS calls
+3) JavaScript client that communicates with server and triggers reloading when needed
 
 ## Notes
 
@@ -91,15 +94,12 @@ You are welcome to contribute. See list of `TODO's` below.
 ## TODO
 
 - reload CSS without reloading the whole page?
-- add `:websocket` mode?
 - smarter reload if there is a change in helper (check methods from rendered views?)
 - generator for initializer
 - more complex rules? e.g. if "user.rb" file is changed - reload all pages with rendered "users" views
 - check with older Rails versions
 - tests or specs
 - CI (github actions)
-- improve how JS code is injected into HTML
-- improve work with turbo, turbolinks
 
 ## License
 

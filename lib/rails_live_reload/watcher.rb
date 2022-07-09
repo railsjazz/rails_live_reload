@@ -27,6 +27,7 @@ module RailsLiveReload
           all.each do |file|
             files[file] = File.mtime(file).to_i rescue nil
           end
+          RailsLiveReload::Middleware::WebSocket.connections.each(&:reload)
         end
         listener.start
       end

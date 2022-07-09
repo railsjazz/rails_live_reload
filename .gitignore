@@ -10,3 +10,6 @@
 /test/dummy/tmp/
 
 *.gem
+
+javascript/node_modules
+javascript/yarn.lock

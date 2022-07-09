@@ -3,7 +3,9 @@ PATH
   specs:
     rails_live_reload (0.1.2)
       listen
-      rails
+      nio4r
+      railties
+      websocket-driver
 
 GEM
   remote: https://rubygems.org/
@@ -184,6 +186,7 @@ DEPENDENCIES
   pry
   pry-nav
   puma
+  rails
   rails_live_reload!
   sprockets-rails
   sqlite3

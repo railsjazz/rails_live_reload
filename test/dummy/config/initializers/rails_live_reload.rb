@@ -1,7 +1,7 @@
 RailsLiveReload.configure do |config|
   # config.url     = "/rails/live/reload"
-  # Available modes are: :long_polling (default) and :polling
-  # config.mode = :long_polling
+  # Available modes are: :websocket (default), :long_polling and :polling
+  # config.mode = :websocket
 
   # This is used with :long_polling mode
   # config.timeout = 30

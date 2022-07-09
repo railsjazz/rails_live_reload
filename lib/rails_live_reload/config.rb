@@ -18,11 +18,11 @@ module RailsLiveReload
   end
 
   class Config
-    attr_reader :patterns
-    attr_accessor :mode, :polling_interval, :timeout, :url, :watcher, :files, :enabled, :long_polling_sleep_duration
+    attr_reader :patterns, :polling_interval, :timeout, :mode, :long_polling_sleep_duration
+    attr_accessor :url, :watcher, :files, :enabled
 
     def initialize
-      @mode = :long_polling
+      @mode = :websocket
       @timeout = 30
       @long_polling_sleep_duration = 0.1
       @polling_interval = 100
@@ -46,6 +46,26 @@ module RailsLiveReload
       end
 
       patterns[pattern] = reload
+    end
+
+    def mode=(mode)
+      warn "[DEPRECATION] RailsLiveReload 'mode' configuration is deprecated and will be removed in future versions #{caller.first}"
+      @mode = mode
+    end
+
+    def polling_interval=(polling_interval)
+      warn "[DEPRECATION] RailsLiveReload 'polling_interval' configuration is deprecated and will be removed in future versions #{caller.first}"
+      @polling_interval = polling_interval
+    end
+
+    def timeout=(timeout)
+      warn "[DEPRECATION] RailsLiveReload 'timeout' configuration is deprecated and will be removed in future versions #{caller.first}"
+      @timeout = timeout
+    end
+
+    def long_polling_sleep_duration=(long_polling_sleep_duration)
+      warn "[DEPRECATION] RailsLiveReload 'long_polling_sleep_duration' configuration is deprecated and will be removed in future versions #{caller.first}"
+      @long_polling_sleep_duration = long_polling_sleep_duration
     end
   end
 end

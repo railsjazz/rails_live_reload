@@ -14,11 +14,10 @@ Gem::Specification.new do |spec|
     Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
   end
 
-  spec.add_dependency "rails"
+  spec.add_dependency "railties"
   spec.add_dependency "listen"
-  spec.add_development_dependency "puma"
-  spec.add_development_dependency "pry"
-  spec.add_development_dependency "pry-nav"
-  spec.add_development_dependency "sprockets-rails"
+  spec.add_dependency "websocket-driver"
+  spec.add_dependency "nio4r"
+
   spec.add_development_dependency "wrapped_print"
 end
