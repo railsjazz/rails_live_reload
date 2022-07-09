@@ -57,7 +57,11 @@ export default class Base {
   }
 
   fullReload() {
-    window.location.reload();
+    if (window.Turbo) {
+      Turbo.visit(window.location);
+    } else {
+      window.location.reload();
+    }
   }
 
   get optionsNode() {
