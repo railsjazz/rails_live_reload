@@ -102,6 +102,10 @@ You are welcome to contribute. See list of `TODO's` below.
 - CI (github actions)
 - auto reload when rendered controller was changed
 
+## Troubleshooting
+
+- `Too many open files - pipe` - increase limits by `ulimit -n 10000`
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
