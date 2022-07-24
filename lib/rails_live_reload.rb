@@ -2,6 +2,8 @@ require "listen"
 require "rails_live_reload/version"
 require "rails_live_reload/config"
 require "rails_live_reload/watcher"
+require "rails_live_reload/server/connections"
+require "rails_live_reload/server/base"
 require "rails_live_reload/middleware/base"
 require "rails_live_reload/middleware/long_polling"
 require "rails_live_reload/middleware/web_socket"
@@ -35,5 +37,9 @@ module RailsLiveReload
     when :long_polling then RailsLiveReload::Middleware::LongPolling
     when :websocket then RailsLiveReload::Middleware::WebSocket
     end
+  end
+
+  module_function def server
+    @server ||= RailsLiveReload::Server::Base.new
   end
 end

@@ -27,6 +27,17 @@ module RailsLiveReload
         app.executor.to_run      { CurrentRequest.cleanup }
         app.executor.to_complete { CurrentRequest.cleanup }
       end
+
+      initializer "rails_live_reload.routes" do
+        config.after_initialize do |app|
+          config = app.config
+          unless config.action_cable.mount_path.nil?
+            app.routes.prepend do
+              mount RailsLiveReload.server => RailsLiveReload.config.url, internal: true, anchor: true
+            end
+          end
+        end
+      end
     end
   end
 end

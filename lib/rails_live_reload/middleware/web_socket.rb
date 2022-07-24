@@ -20,10 +20,10 @@ module RailsLiveReload
         def add_connection(connection)
           connections << connection
         end
-  
+
         def remove_connection(connection)
           connections.delete connection
-        end  
+        end
       end
 
       def initialize(env)

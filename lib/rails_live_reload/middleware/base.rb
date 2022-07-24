@@ -13,8 +13,8 @@ module RailsLiveReload
         request = Rack::Request.new(env)
 
         case env["REQUEST_PATH"]
-        when RailsLiveReload.config.url
-          main_rails_live_response(request)
+        # when RailsLiveReload.config.url
+        #   main_rails_live_response(request)
         when "#{RailsLiveReload.config.url}/script"
           content = client_javascript
           [200, {'Content-Type' => 'application/javascript', 'Content-Length' => content.size.to_s, 'Cache-Control' => 'no-store'}, [content]]

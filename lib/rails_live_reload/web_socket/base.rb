@@ -34,13 +34,13 @@ module RailsLiveReload
         when 'setup'
           setup payload['options']
         else
-          raise NotImplementedError          
+          raise NotImplementedError
         end
       end
 
       def reload
         return if dt.nil? || files.nil? || RailsLiveReload::Checker.scan(dt, files).size.zero?
-  
+
         transmit({command: "RELOAD"})
       end  
 
@@ -88,7 +88,7 @@ module RailsLiveReload
       def setup(options)
         @dt = options['dt']
         @files = options['files']
-      end  
+      end
 
       def encode(message)
         message.to_json
