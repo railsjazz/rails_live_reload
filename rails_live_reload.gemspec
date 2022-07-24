@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.summary     = "Ruby on Rails Live Reload"
   spec.description = "Ruby on Rails Live Reload with just a single line of code - just add the gem to Gemfile."
   spec.license     = "MIT"
-  
+
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
     Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
   end

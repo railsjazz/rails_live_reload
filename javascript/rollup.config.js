@@ -13,39 +13,7 @@ const banner = `/*!
 
 export default [
   {
-    input: "polling.js",
-    output: [
-      {
-        name: "RailsLiveReload",
-        file: "../lib/rails_live_reload/javascript/polling.js",
-        format: "iife",
-        banner: banner,
-        plugins: [terser()],
-      },
-    ],
-    plugins: [resolve()],
-    watch: {
-      include: "**",
-    },
-  },
-  {
-    input: "long_polling.js",
-    output: [
-      {
-        name: "RailsLiveReload",
-        file: "../lib/rails_live_reload/javascript/long_polling.js",
-        format: "iife",
-        banner: banner,
-        plugins: [terser()],
-      },
-    ],
-    plugins: [resolve()],
-    watch: {
-      include: "**",
-    },
-  },
-  {
-    input: "websocket.js",
+    input: "index.js",
     output: [
       {
         name: "RailsLiveReload",
