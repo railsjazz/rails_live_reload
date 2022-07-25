@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails_live_reload (0.2.0)
+    rails_live_reload (0.3.0)
       listen
       nio4r
       railties
