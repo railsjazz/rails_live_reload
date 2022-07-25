@@ -1,11 +1,18 @@
 module RailsLiveReload
   class Checker
+    def self.files
+      @files
+    end
+
+    def self.files=(files)
+      @files = files
+    end
 
     def self.scan(dt, rendered_files)
       temp = []
 
       # all changed files
-      RailsLiveReload.watcher.files.each do |file, fdt|
+      files.each do |file, fdt|
         temp << file if fdt && fdt > dt
       end
 
@@ -25,6 +32,5 @@ module RailsLiveReload
 
       result
     end
-
   end
 end

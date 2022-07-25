@@ -40,28 +40,12 @@ $ bundle
 
 ## Configuration
 
-### There are three modes:
-1. `:websocket` - This is a default mode which uses websockets to trigger page reloading.
-2. `:long_polling` - **[Deprecated]** This mode uses [long polling](https://javascript.info/long-polling) techunique, client opens a connection that will hang until either change is detected, or timeout happens, if later, a new connection is oppened.
-3. `:polling` - **[Deprecated]** This mode will use regular polling to detect changes, you can configure custom `polling_interval` (default is 100ms). We recommend using `:long_polling` as it makes much less requests to the server.
-
-Keep in mind that `mode` configuration is **deprecated** and will be removed in the future, with `:websocket` be the only one available, in case you think that modes like `:long_polling` or `:polling` should be preserved feel free to open an issue.
-
 ### Create initializer `config/initializers/rails_live_reload.rb`:
 
 
 ```ruby
 RailsLiveReload.configure do |config|
-  # config.url     = "/rails/live/reload"
-  # Available modes are: :websocket (default), :long_polling and :polling
-  # config.mode = :websocket
-
-  # This is used with :long_polling mode
-  # config.timeout = 30
-  # config.long_polling_sleep_duration = 0.1
-
-  # This is used with :polling mode
-  # config.polling_interval = 100
+  # config.url = "/rails/live/reload"
 
   # Default watched folders & files
   # config.watch %r{app/views/.+\.(erb|haml|slim)$}

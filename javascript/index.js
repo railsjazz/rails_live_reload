@@ -1,4 +1,8 @@
-import Base, { COMMANDS } from "./base";
+const COMMANDS = {
+  RELOAD: "RELOAD",
+};
+
+const PROTOCOLS = ['rails-live-reload-v1-json'];
 
 // This was copied from actioncable
 // https://github.com/rails/rails/blob/31b1403919eec0973921ab42251bfbbf3d4422b6/actioncable/app/javascript/action_cable/consumer.js#L60
@@ -19,9 +23,55 @@ function createWebSocketURL(url) {
   }
 }
 
-const PROTOCOLS = ['rails-live-reload-v1-json'];
+export default class RailsLiveReload {
+  static _instance;
 
-export default class RailsLiveReload extends Base {
+  static get instance() {
+    if (RailsLiveReload._instance) return RailsLiveReload._instance;
+
+    RailsLiveReload._instance = new this();
+    return RailsLiveReload._instance;
+  }
+
+  static start() {
+    this.instance.start();
+  }
+
+  constructor() {
+    this.initialize();
+
+    document.addEventListener("turbo:render", () => {
+      if (document.documentElement.hasAttribute("data-turbo-preview")) return;
+
+      this.restart();
+    });
+    document.addEventListener("turbolinks:render", () => {
+      if (document.documentElement.hasAttribute("data-turbolinks-preview"))
+        return;
+
+      this.restart();
+    });
+  }
+
+  initialize() {
+    const { files, time, url } = JSON.parse(this.optionsNode.textContent);
+
+    this.files = files;
+    this.time = time;
+    this.url = url;
+  }
+
+  fullReload() {
+    window.location.reload();
+  }
+
+  get optionsNode() {
+    const node = document.getElementById("rails-live-reload-options");
+    if (!node) throw "Unable to find RailsLiveReload options";
+
+    return node;
+  }
+
   start() {
     if (this.connection) return;
 
