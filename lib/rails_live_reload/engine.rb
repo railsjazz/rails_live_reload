@@ -32,7 +32,7 @@ module RailsLiveReload
       initializer "rails_live_reload.routes" do
         config.after_initialize do |app|
           app.routes.prepend do
-            mount RailsLiveReload.server => RailsLiveReload.config.url, internal: true, anchor: true
+            mount RailsLiveReload.server => RailsLiveReload.config.url, internal: true
           end
         end
       end
