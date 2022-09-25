@@ -31,11 +31,9 @@ module RailsLiveReload
       private
 
       def make_new_response(body)
-        body = body.sub("</head>", <<~HTML.html_safe)
+        index = body.rindex(/<\/body>/i) || body.rindex(/<\/html>/i)
+        body.insert(index, <<~HTML.html_safe)
           <script defer type="text/javascript" src="#{RailsLiveReload.config.url}/script"></script>
-          </head>
-        HTML
-        body.sub("</body>", <<~HTML.html_safe)
           <script id="rails-live-reload-options" type="application/json">
             #{{
               files: CurrentRequest.current.data.to_a,
@@ -43,7 +41,6 @@ module RailsLiveReload
               url: RailsLiveReload.config.url
             }.to_json}
           </script>
-          </body>
         HTML
       end
 
