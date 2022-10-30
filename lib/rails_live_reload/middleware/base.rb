@@ -32,6 +32,8 @@ module RailsLiveReload
 
       def make_new_response(body)
         index = body.rindex(/<\/body>/i) || body.rindex(/<\/html>/i)
+        return body if index.nil?
+
         body.insert(index, <<~HTML.html_safe)
           <script defer type="text/javascript" src="#{RailsLiveReload.config.url}/script"></script>
           <script id="rails-live-reload-options" type="application/json">
