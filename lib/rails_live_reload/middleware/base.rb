@@ -16,19 +16,29 @@ module RailsLiveReload
           end
         else
           request = Rack::Request.new(env)
-          status, headers, response = @app.call(env)
+          status, headers, body = @app.call(env)
 
-          if html?(headers) && response.respond_to?(:[]) && (status == 500 || (status.to_s =~ /20./ && request.get?))
-            new_response = make_new_response(response[0])
-            headers['Content-Length'] = new_response.bytesize.to_s
-            response = [new_response]
+          if html?(headers) && (status == 500 || (status.to_s =~ /20./ && request.get?))
+            return inject_rails_live_reload(status, headers, body)
           end
 
-          [status, headers, response]
+          [status, headers, body]
         end
       end
 
       private
+
+      def inject_rails_live_reload(status, headers, body)
+        response = Rack::Response.new([], status, headers)
+
+        if String === body
+          response.write make_new_response(body)
+        else
+          body.each { |fragment| response.write make_new_response(fragment) }
+        end
+        body.close if body.respond_to?(:close)
+        response.finish
+      end
 
       def make_new_response(body)
         index = body.rindex(/<\/body>/i) || body.rindex(/<\/html>/i)
