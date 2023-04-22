@@ -49,7 +49,13 @@ module RailsLiveReload
     end
 
     def socket_path
-      root_path.join('tmp/sockets/rails_live_reload.sock')
+      root_path.join('tmp/sockets/rails_live_reload.sock').then do |path|
+        break path if path.to_s.size <= 104 # 104 is the max length of a socket path
+
+        puts "Unable to create socket path inside the project, using /tmp instead"
+        app_name = ::Rails.application.class.name.split('::').first.underscore
+        Pathname.new("/tmp/rails_live_reload_#{app_name}.sock")
+      end
     end
   end
 end
