@@ -76,6 +76,9 @@ The default configuration assumes that you either use asset pipeline, or that yo
 
 You are welcome to contribute. See list of `TODO's` below.
 
+[<img src="https://opensource-heroes.com/svg/embed/railsjazz/rails_live_reload"
+/>](https://opensource-heroes.com/svg/embed/railsjazz/rails_live_reload)
+
 ## TODO
 
 - reload CSS without reloading the whole page?
