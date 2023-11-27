@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RailsLiveReload.configure do |config|
   # config.url = "/rails/live/reload"
 

@@ -44,7 +44,7 @@ $ bundle
 run command:
 
 
-```ruby
+```bash
 rails generate rails_live_reload:install
 ```
 The generator will install an initializer which describes `RailsLiveReload` configuration options.
