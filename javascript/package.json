@@ -1,6 +1,6 @@
 {
   "name": "rails_live_reload",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "repository": "https://github.com/railsjazz/rails_live_reload.git",
   "author": "www.railsjazz.com",
   "license": "MIT",
