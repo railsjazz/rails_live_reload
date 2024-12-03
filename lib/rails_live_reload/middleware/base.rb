@@ -57,7 +57,7 @@ module RailsLiveReload
       end
 
       def html?(headers)
-        headers["Content-Type"].to_s.include?("text/html")
+        headers["content-type"].to_s.include?("text/html")
       end
     end
   end
