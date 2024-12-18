@@ -18,7 +18,7 @@ module RailsLiveReload
           request = ActionDispatch::Request.new(env)
           status, headers, body = @app.call(env)
 
-          if html?(headers) && (status == 500 || (status.to_s =~ /20./ && request.get?))
+          if html?(headers) && (status == 500 || status == 422 || (status.to_s =~ /20./ && request.get?))
             return inject_rails_live_reload(request, status, headers, body)
           end
 
