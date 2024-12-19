@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gemspec
 
-gem "rails"
+gem "rails", "~> 7.1.0"
 
 gem "puma"
 gem "sprockets-rails"
