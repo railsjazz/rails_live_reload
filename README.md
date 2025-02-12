@@ -1,7 +1,6 @@
 # Rails Live Reload
 
 [![RailsJazz](https://github.com/igorkasyanchuk/rails_time_travel/blob/main/docs/my_other.svg?raw=true)](https://www.railsjazz.com)
-[![Listed on OpenSource-Heroes.com](https://opensource-heroes.com/badge-v1.svg)](https://opensource-heroes.com/r/railsjazz/rails_live_reload)
 
 ![RailsLiveReload](docs/rails_live_reload.gif)
 
@@ -65,9 +64,6 @@ The default configuration assumes that you either use asset pipeline, or that yo
 ## Contributing
 
 You are welcome to contribute. See list of `TODO's` below.
-
-[<img src="https://opensource-heroes.com/svg/embed/railsjazz/rails_live_reload"
-/>](https://opensource-heroes.com/svg/embed/railsjazz/rails_live_reload)
 
 ## TODO
 
