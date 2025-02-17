@@ -1,3 +1,5 @@
+require "fileutils"
+
 module RailsLiveReload
   class Watcher
     attr_reader :files, :sockets
@@ -21,6 +23,7 @@ module RailsLiveReload
       end
 
       build_tree
+      create_socket_directory
       start_socket
       start_listener
     end
@@ -53,6 +56,10 @@ module RailsLiveReload
       @sockets.each do |socket, _|
         socket.puts data
       end
+    end
+
+    def create_socket_directory
+      FileUtils.mkdir_p File.dirname(RailsLiveReload.config.socket_path)
     end
 
     def start_socket
