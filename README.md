@@ -4,6 +4,8 @@
 
 ![RailsLiveReload](docs/rails_live_reload.gif)
 
+[!["Buy Me A Coffee"](https://github.com/igorkasyanchuk/get-smart/blob/main/docs/snapshot-bmc-button-small.png?raw=true)](https://buymeacoffee.com/igorkasyanchuk)
+
 This is the simplest and probably the most robust way to add live reloading to your Rails app.
 
 Just add the gem and thats it, now you have a live reloading. **You don't need anything other than this gem for live reloading to work**.
@@ -86,3 +88,6 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 [<img src="https://github.com/igorkasyanchuk/rails_time_travel/blob/main/docs/more_gems.png?raw=true"
 />](https://www.railsjazz.com/?utm_source=github&utm_medium=bottom&utm_campaign=rails_live_reload)
+
+
+[!["Buy Me A Coffee"](https://github.com/igorkasyanchuk/get-smart/blob/main/docs/snapshot-bmc-button-small.png?raw=true)](https://buymeacoffee.com/igorkasyanchuk)
