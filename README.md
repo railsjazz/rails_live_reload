@@ -2,9 +2,9 @@
 
 [![RailsJazz](https://github.com/igorkasyanchuk/rails_time_travel/blob/main/docs/my_other.svg?raw=true)](https://www.railsjazz.com)
 
-![RailsLiveReload](docs/rails_live_reload.gif)
-
 [!["Buy Me A Coffee"](https://github.com/igorkasyanchuk/get-smart/blob/main/docs/snapshot-bmc-button-small.png?raw=true)](https://buymeacoffee.com/igorkasyanchuk)
+
+![RailsLiveReload](docs/rails_live_reload.gif)
 
 This is the simplest and probably the most robust way to add live reloading to your Rails app.
 
