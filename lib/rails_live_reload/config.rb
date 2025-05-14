@@ -12,13 +12,17 @@ module RailsLiveReload
       config.patterns
     end
 
+    def ignore_patterns
+      config.ignore_patterns
+    end
+
     def enabled?
       config.enabled
     end
   end
 
   class Config
-    attr_reader :patterns
+    attr_reader :patterns, :ignore_patterns
     attr_accessor :url, :watcher, :files, :enabled
 
     def initialize
@@ -33,6 +37,8 @@ module RailsLiveReload
         %r{(app|vendor)/(assets|javascript)/\w+/(.+\.(css|js|html|png|jpg|ts|jsx)).*} => :always
       }
       @default_patterns_changed = false
+
+      @ignore_patterns = []
     end
 
     def root_path
@@ -46,6 +52,10 @@ module RailsLiveReload
       end
 
       patterns[pattern] = reload
+    end
+
+    def ignore(pattern)
+      @ignore_patterns << pattern
     end
 
     def socket_path

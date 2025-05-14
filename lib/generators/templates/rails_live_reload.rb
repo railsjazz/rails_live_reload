@@ -11,5 +11,8 @@ RailsLiveReload.configure do |config|
   # config.watch %r{app/helpers/.+\.rb}, reload: :always
   # config.watch %r{config/locales/.+\.yml}, reload: :always
 
+  # Ignored folders & files
+  # config.ignore %r{node_modules/}
+
   # config.enabled = Rails.env.development?
 end if defined?(RailsLiveReload)
