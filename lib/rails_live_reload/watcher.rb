@@ -30,7 +30,7 @@ module RailsLiveReload
 
     def start_listener
       Thread.new do
-        listener = Listen.to(root) do |modified, added, removed|
+        listener = Listen.to(root, ignore: RailsLiveReload.ignore_patterns) do |modified, added, removed|
           all = modified + added + removed
           all.each do |file|
             files[file] = File.mtime(file).to_i rescue nil
