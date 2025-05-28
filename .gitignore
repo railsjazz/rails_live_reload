@@ -13,3 +13,7 @@
 
 javascript/node_modules
 javascript/yarn.lock
+
+.DS_Store
+
+**/*/.DS_Store
